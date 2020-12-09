@@ -86,7 +86,7 @@ final class GithubTagType extends GithubRepositoryType implements SourceReposito
         $this->release->setVersion($release->tag_name)
                       ->setRelease($release->tag_name.'.zip')
                       ->updateStoragePath()
-                      ->setDownloadUrl($release->zipball_url);
+                      ->setDownloadUrl($release->assets[0]->browser_download_url);
 
         if (! $this->release->isSourceAlreadyFetched()) {
             $this->release->download($this->client);
